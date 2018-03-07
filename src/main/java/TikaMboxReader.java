@@ -1,6 +1,7 @@
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.lang.invoke.MethodHandles;
 import java.util.List;
 import java.util.Map;
 
@@ -22,7 +23,7 @@ import org.xml.sax.SAXException;
 
 public class TikaMboxReader {
 
-    private static Logger LOG = LoggerFactory.getLogger("x");
+    private static Logger LOG = LoggerFactory.getLogger(MethodHandles.lookup().lookupClass());
 
     private static InputStream getStream(String name) {
         return TikaMboxReader.class.getClass().getResourceAsStream(name);
@@ -47,10 +48,15 @@ public class TikaMboxReader {
             ContentHandler handler = new BodyContentHandler(-1);
             Metadata metadata = new Metadata();
 
-            try (InputStream stream = new FileInputStream("C:\\Users\\alexb\\Downloads\\All mail Including Spam and Trash-021.mbox")) {
+            try (InputStream stream = new FileInputStream("/Users/ableasdale/Downloads/smallmbox.mbox.txt")) {
                 mboxParser.parse(stream, handler, metadata, recursingContext);
                 Map<Integer, Metadata> mailsMetadata = mboxParser.getTrackingMetadata();
+//                for (Object o :mboxParser.getTrackingMetadata().entrySet()){
+//                    (Metadata) o.
+//                }
                 LOG.info("Map size"+mailsMetadata.size());
+
+
 
             } catch (IOException e) {
                 e.printStackTrace();
