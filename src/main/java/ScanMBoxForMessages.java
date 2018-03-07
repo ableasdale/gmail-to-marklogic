@@ -16,7 +16,7 @@ public class ScanMBoxForMessages {
 
     public static void main(String[] args) {
 
-        String fileName = "C:\\Users\\alexb\\Downloads\\All mail Including Spam and Trash-021.mbox";
+        String fileName = "E:\\smallmbox.mbox.txt";
 
         //read file into stream, try-with-resources
         try (Stream<String> stream = Files.lines(Paths.get(fileName))) {
